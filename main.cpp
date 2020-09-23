@@ -19,7 +19,8 @@ using namespace std;
 #define MAX 50
 int codigo[MAX], cantidad[MAX], faltantes[MAX];
 int stock_min = 100;
-void generaCodigo(int []);
+int cod, cant, pos;
+void generaCodigo(int []); //funcion para generar codigos
 void mostrarCodigo(int []);
 void mostrarCantidad(int []);
 void mostrarFaltantes(int []);
@@ -33,6 +34,10 @@ int main(int argc, char** argv) {
     generaCodigo(codigo);
     generarCantidad(cantidad);
     verificarFaltantes(cantidad);
+   
+    mostrarCantidad(cantidad);
+
+
 
 
     do {
@@ -47,18 +52,38 @@ int main(int argc, char** argv) {
 
         switch (opc) {
             case 1:
+                cout << "Ingrese el codigo: ";
+                cin >> cod;
+                cout << "Ingrese la cantidad: ";
+                cin >> cant;
+                
+                for (int i = 0; i < MAX; i++) {
+                    if(codigo[i]==cod){
+                        pos = i;
+                        cantidad[pos]= cantidad[pos] + cant;
+                        break;
+                    }
+                }
+                             
+                
                 break;
             case 2:
                 break;
             case 3:
-                mostrarFaltantes(faltantes);
+                //mostrarFaltantes(faltantes);
                 break;
         }
 
     } while (opc != 4);
+ 
 
 
-    return 0;
+ mostrarCantidad(cantidad);
+
+
+
+
+return 0;
 }
 
 void generaCodigo(int codigo[]) {
@@ -84,7 +109,7 @@ void generarCantidad(int cantidad[]) {
 void mostrarCantidad(int codigo[]) {
 
     for (int i = 0; i < MAX; i++) {
-        cout << cantidad[i] << endl;
+        cout << "pos[" << i << "]  " << cantidad[i] << endl;
     }
 }
 
@@ -93,11 +118,11 @@ void verificarFaltantes(int cantidad[]) {
     for (int i = 0; i < MAX; i++) {
 
         if (cantidad[i] >= stock_min) {
-            
+
             faltantes[i] = 0;
-            
+
         } else {
-            
+
             faltantes[i] = stock_min - cantidad[i];
         }
 
