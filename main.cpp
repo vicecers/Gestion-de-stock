@@ -22,9 +22,10 @@ int stock_min = 100;
 int cod, cant, pos;
 void generaCodigo(int []); //funcion para generar codigos
 void mostrarCodigo(int []);
+void generarCantidad(int []);
 void mostrarCantidad(int []);
 void mostrarFaltantes(int []);
-void generarCantidad(int []);
+
 void verificarFaltantes(int []);
 
 int main(int argc, char** argv) {
@@ -34,8 +35,8 @@ int main(int argc, char** argv) {
     generaCodigo(codigo);
     generarCantidad(cantidad);
     verificarFaltantes(cantidad);
-   
-    mostrarCantidad(cantidad);
+
+
 
 
 
@@ -45,45 +46,69 @@ int main(int argc, char** argv) {
         cout << "1- Entrada de mercaderia" << endl;
         cout << "2- Salida de mercaderia" << endl;
         cout << "3- Lista de mercaderia faltante" << endl;
-        cout << "4- Salir del programa" << endl;
+        cout << "4- Lista de mercaderia" << endl;
+        cout << "5- Salir del programa" << endl;
 
         cout << "Ingrese una opcion: ";
         cin>>opc;
 
         switch (opc) {
             case 1:
+
                 cout << "Ingrese el codigo: ";
                 cin >> cod;
                 cout << "Ingrese la cantidad: ";
                 cin >> cant;
-                
+
                 for (int i = 0; i < MAX; i++) {
-                    if(codigo[i]==cod){
+                    if (codigo[i] == cod) {
                         pos = i;
-                        cantidad[pos]= cantidad[pos] + cant;
+                        cantidad[pos] = cantidad[pos] + cant;
+                        cout << "Se agrego l cantidad ";
                         break;
                     }
                 }
-                             
-                
                 break;
             case 2:
+                cout << "Ingrese el codigo: ";
+                cin >> cod;
+                cout << "Ingrese la cantidad: ";
+                cin >> cant;
+
+                for (int i = 0; i < MAX; i++) {
+                    if (codigo[i] == cod) {
+                        pos = i;
+                        cantidad[pos] = cantidad[pos] - cant;
+                        cout << "Se resto cantidad ";
+                        break;
+                    }
+                }
+
                 break;
             case 3:
-                //mostrarFaltantes(faltantes);
+                verificarFaltantes(cantidad);
+                mostrarFaltantes(faltantes);
+                break;
+            case 4:
+                cout << "Codigo" << "  Cantidad" << endl;
+                for (int i = 0; i < MAX; i++) {
+                    cout << codigo[i] << " :    " << cantidad[i] << endl;
+                }
+
+
+
                 break;
         }
 
-    } while (opc != 4);
- 
-
-
- mostrarCantidad(cantidad);
+    } while (opc != 5);
 
 
 
 
-return 0;
+
+
+
+    return 0;
 }
 
 void generaCodigo(int codigo[]) {
@@ -96,7 +121,7 @@ void generaCodigo(int codigo[]) {
 void mostrarCodigo(int codigo[]) {
 
     for (int i = 0; i < MAX; i++) {
-        cout << codigo[i] << endl;
+        cout << "pos[" << i << "]  " << codigo[i] << endl;
     }
 }
 
@@ -133,6 +158,6 @@ void verificarFaltantes(int cantidad[]) {
 void mostrarFaltantes(int faltantes[]) {
 
     for (int i = 0; i < MAX; i++) {
-        cout << faltantes[i] << endl;
+        cout << codigo[i] << " :    " << faltantes[i] << endl;
     }
 }
