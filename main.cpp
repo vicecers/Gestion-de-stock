@@ -38,9 +38,6 @@ int main(int argc, char** argv) {
 
 
 
-
-
-
     do {
 
         cout << "1- Entrada de mercaderia" << endl;
@@ -54,21 +51,27 @@ int main(int argc, char** argv) {
 
         switch (opc) {
             case 1:
-
                 cout << "Ingrese el codigo: ";
                 cin >> cod;
+
                 cout << "Ingrese la cantidad: ";
                 cin >> cant;
 
-                for (int i = 0; i < MAX; i++) {
-                    if (codigo[i] == cod) {
-                        pos = i;
-                        cantidad[pos] = cantidad[pos] + cant;
-                        cout << "Se agrego l cantidad ";
-                        break;
+                if (cant > 0) {
+                    for (int i = 0; i < MAX; i++) {
+                        if (codigo[i] == cod) {
+                            pos = i;
+                            cantidad[pos] = cantidad[pos] + cant;
+                            cout << "Se agrego la cantidad " << endl;
+                            break;
+                        }
                     }
+                } else {
+                    cout << "La cantidad debe ser superior a 0" << endl;
                 }
+
                 break;
+
             case 2:
                 cout << "Ingrese el codigo: ";
                 cin >> cod;
@@ -78,8 +81,13 @@ int main(int argc, char** argv) {
                 for (int i = 0; i < MAX; i++) {
                     if (codigo[i] == cod) {
                         pos = i;
-                        cantidad[pos] = cantidad[pos] - cant;
-                        cout << "Se resto cantidad ";
+                        if (cantidad[pos] >= cant) {
+                            cantidad[pos] = cantidad[pos] - cant;
+                            cout << "Se resto cantidad ";
+                        } else {
+                            cout << "Sin stock disponible " << endl;
+                        }
+
                         break;
                     }
                 }
@@ -95,16 +103,10 @@ int main(int argc, char** argv) {
                     cout << codigo[i] << " :    " << cantidad[i] << endl;
                 }
 
-
-
                 break;
         }
 
     } while (opc != 5);
-
-
-
-
 
 
 
